@@ -1,4 +1,4 @@
-package net.smallacademy.gridcycle;
+package Template.gridcycle.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import Template.gridcycle.Object.ItemInfo;
+import net.smallacademy.gridcycle.R;
+
+import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
-    List<String> titles;
-    List<Integer> images;
+    ArrayList<ItemInfo> itemList;
     LayoutInflater inflater;
 
-    public Adapter(Context ctx, List<String> titles, List<Integer> images){
-        this.titles = titles;
-        this.images = images;
+    public Adapter(Context ctx,  ArrayList<ItemInfo> itemList){
+        this.itemList = itemList;
         this.inflater = LayoutInflater.from(ctx);
     }
 
@@ -29,19 +30,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.custom_grid_layout,parent,false);
+        View view = inflater.inflate(R.layout.custom_grid_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            holder.title.setText(titles.get(position));
-            holder.gridIcon.setImageResource(images.get(position));
+            holder.title.setText(itemList.get(position).getTittle());
+            holder.gridIcon.setImageResource(itemList.get(position).getImageId());
     }
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        return itemList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
